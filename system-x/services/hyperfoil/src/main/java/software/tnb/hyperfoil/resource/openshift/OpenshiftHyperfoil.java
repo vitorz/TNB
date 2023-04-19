@@ -121,9 +121,7 @@ public class OpenshiftHyperfoil extends Hyperfoil implements ReusableOpenshiftDe
 
     private Map<String, Object> getHyperfoilDefinition(boolean includesAgentLog) {
         Map<String, Object> metadata = Map.of("name", APP_NAME, "namespace", OpenshiftClient.get().getNamespace());
-        Map<String, Object> spec = Map.of("agentDeployTimeout", 120000, "version", "latest", "route",
-                Map.of("host", OpenshiftClient.get().generateHostname("hyperfoil")) // "hyperfoil.apps.mycloud.example.com"
-        );
+        Map<String, Object> spec = Map.of("agentDeployTimeout", 120000, "version", "latest");
         if (includesAgentLog) {
             spec = new HashMap<>(spec);
             spec.put("log", HyperfoilConfiguration.agentLogMapConfig() + "/" + HyperfoilConfiguration.agentLogFileName());
